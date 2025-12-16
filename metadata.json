@@ -1,0 +1,5 @@
+{
+  "name": "SonicFrame AI",
+  "description": "A video-to-audio generation prototype that analyzes video content using Gemini Vision and simulates audio synthesis workflows.",
+  "requestFramePermissions": []
+}
