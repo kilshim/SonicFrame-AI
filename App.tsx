@@ -237,14 +237,14 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-dark-900 text-slate-200 font-sans selection:bg-brand-500/30 flex flex-col">
         {/* Header (Top Bar) */}
         <header className="border-b border-slate-800 bg-dark-900/90 backdrop-blur-md sticky top-0 z-50 h-16 flex-none">
-            <div className="max-w-full px-6 h-full flex items-center justify-between">
+            <div className="max-w-full px-4 md:px-6 h-full flex items-center justify-between">
                 <div className="flex items-center gap-2 cursor-pointer" onClick={handleReset}>
                     <div className="w-8 h-8 rounded bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/20">
                         <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                         </svg>
                     </div>
-                    <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+                    <span className="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
                         SonicFrame AI
                     </span>
                 </div>
@@ -252,20 +252,21 @@ const App: React.FC = () => {
                 <div className="relative">
                   <button 
                     onClick={() => setShowSettings(!showSettings)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all border ${showSettings ? 'bg-brand-900/50 border-brand-500 text-brand-300' : 'bg-dark-800 border-slate-700 text-slate-300 hover:bg-dark-700'}`}
+                    className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all border ${showSettings ? 'bg-brand-900/50 border-brand-500 text-brand-300' : 'bg-dark-800 border-slate-700 text-slate-300 hover:bg-dark-700'}`}
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    설정 {pendingFile && !geminiKey && <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>}
+                    <span className="hidden sm:inline">설정</span>
+                    {pendingFile && !geminiKey && <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>}
                   </button>
 
-                  {/* API Key Settings Dropdown */}
+                  {/* API Key Settings Dropdown - Mobile Responsive */}
                   {showSettings && (
                       <div 
                           ref={settingsRef}
-                          className="absolute top-12 right-0 w-96 bg-dark-800/95 backdrop-blur-xl border border-slate-600 rounded-xl shadow-2xl p-6 z-50 animate-fade-in-up origin-top-right"
+                          className="absolute top-12 right-0 w-[calc(100vw-2rem)] max-w-sm bg-dark-800/95 backdrop-blur-xl border border-slate-600 rounded-xl shadow-2xl p-6 z-50 animate-fade-in-up origin-top-right mr-[-10px] sm:mr-0 sm:w-96"
                       >
                           <div className="flex justify-between items-center mb-4">
                               <h3 className="text-white font-semibold flex items-center gap-2">
@@ -358,18 +359,19 @@ const App: React.FC = () => {
             </div>
         </header>
 
-        {/* Main Content - Split Layout */}
-        <div className="flex-grow flex flex-col lg:flex-row overflow-hidden h-[calc(100vh-64px)]">
+        {/* Main Content - Responsive Layout */}
+        {/* Mobile: Column Reverse (App Top, Guide Bottom), Desktop: Row (Guide Left, App Right) */}
+        <div className="flex-grow flex flex-col-reverse lg:flex-row lg:overflow-hidden h-auto lg:h-[calc(100vh-64px)]">
             
-            {/* Left Panel: Guide (Sticky/Scrollable) */}
-            <aside className="w-full lg:w-[450px] flex-shrink-0 bg-dark-800/30 border-r border-slate-800 overflow-y-auto custom-scrollbar relative z-10">
-                <div className="p-8">
+            {/* Guide Panel */}
+            <aside className="w-full lg:w-[450px] flex-shrink-0 bg-dark-800/30 border-t lg:border-t-0 lg:border-r border-slate-800 lg:overflow-y-auto custom-scrollbar relative z-10">
+                <div className="p-4 lg:p-8">
                    <GuideSection />
                 </div>
             </aside>
 
-            {/* Right Panel: Interactive App */}
-            <main className="flex-1 overflow-y-auto custom-scrollbar bg-dark-900 p-8 relative">
+            {/* Interactive App Panel */}
+            <main className="flex-1 lg:overflow-y-auto custom-scrollbar bg-dark-900 p-4 lg:p-8 relative min-h-[50vh]">
                 
                 <div className="max-w-4xl mx-auto">
                     <StepIndicator currentStep={currentStep} />
@@ -422,11 +424,11 @@ const App: React.FC = () => {
                     <div className="transition-all duration-500">
                         {currentStep === AppStep.UPLOAD && (
                             <div className="animate-fade-in-up">
-                                <div className="text-center mb-8">
-                                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                                <div className="text-center mb-6 md:mb-8">
+                                    <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 md:mb-4 tracking-tight">
                                         영상에 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-brand-600">소리를 입혀보세요</span>
                                     </h1>
-                                    <p className="text-slate-400 text-lg">
+                                    <p className="text-slate-400 text-sm md:text-lg">
                                         파일을 업로드하면 AI가 분석부터 사운드 생성까지 자동으로 처리합니다.
                                     </p>
                                 </div>
@@ -435,12 +437,12 @@ const App: React.FC = () => {
                         )}
 
                         {currentStep === AppStep.ANALYSIS && (
-                            <div className="w-full flex flex-col items-center justify-center py-20 animate-fade-in">
+                            <div className="w-full flex flex-col items-center justify-center py-10 md:py-20 animate-fade-in">
                                 {isAnalyzing ? (
                                     <>
                                         <div className="w-16 h-16 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin mb-6"></div>
                                         <h2 className="text-2xl font-semibold text-white mb-2">장면 분석 중...</h2>
-                                        <p className="text-slate-400">Gemini가 영상의 시각적 정보를 분석하고 있습니다.</p>
+                                        <p className="text-slate-400 text-center px-4">Gemini가 영상의 시각적 정보를 분석하고 있습니다.</p>
                                     </>
                                 ) : analysis && (
                                     <AnalysisView 
@@ -455,7 +457,7 @@ const App: React.FC = () => {
                         )}
 
                         {currentStep === AppStep.GENERATION && (
-                            <div className="w-full flex flex-col items-center justify-center py-20 animate-fade-in">
+                            <div className="w-full flex flex-col items-center justify-center py-10 md:py-20 animate-fade-in">
                                 <div className="relative w-24 h-24 mb-8">
                                     <div className="absolute inset-0 bg-brand-500/20 rounded-full animate-ping"></div>
                                     <div className="relative bg-dark-800 w-full h-full rounded-full border border-brand-500/50 flex items-center justify-center">
@@ -465,7 +467,7 @@ const App: React.FC = () => {
                                     </div>
                                 </div>
                                 <h2 className="text-2xl font-semibold text-white mb-2">효과음 생성 중...</h2>
-                                <p className="text-slate-400 text-center max-w-md">
+                                <p className="text-slate-400 text-center max-w-md px-4">
                                     {elevenLabsKey ? 'ElevenLabs API 호출 중' : '절차적 오디오 합성 중'}...<br/>
                                     <span className="text-brand-400 italic">"{finalPromptUsed.slice(0, 50)}..."</span>
                                 </p>

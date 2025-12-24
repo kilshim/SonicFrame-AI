@@ -2,10 +2,10 @@ import React from 'react';
 
 const GuideSection: React.FC = () => {
   return (
-    <div className="space-y-8 animate-fade-in text-left h-full">
+    <div className="space-y-6 lg:space-y-8 animate-fade-in text-left h-full">
       {/* Intro */}
       <div>
-        <h2 className="text-2xl font-bold text-white mb-4">사용 가이드</h2>
+        <h2 className="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-4">사용 가이드</h2>
         <p className="text-slate-400 leading-relaxed text-sm">
           SonicFrame AI는 Gemini Vision의 시각 분석 능력과 ElevenLabs의 사운드 생성 기술을 결합하여, 
           영상에 딱 맞는 효과음(SFX)을 자동으로 생성해주는 도구입니다.
@@ -15,7 +15,7 @@ const GuideSection: React.FC = () => {
       <div className="h-px bg-slate-800"></div>
 
       {/* Steps */}
-      <div className="space-y-8">
+      <div className="space-y-6 lg:space-y-8">
         {/* Step 1 */}
         <div className="flex gap-4">
             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-900/50 text-brand-400 flex items-center justify-center font-bold border border-brand-500/30">1</div>
