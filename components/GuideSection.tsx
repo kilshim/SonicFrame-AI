@@ -2,9 +2,9 @@ import React from 'react';
 
 const GuideSection: React.FC = () => {
   return (
-    <div className="space-y-6 lg:space-y-8 animate-fade-in text-left h-full">
+    <div className="space-y-6 lg:space-y-8 animate-fade-in text-left h-full flex flex-col">
       {/* Intro */}
-      <div>
+      <div className="flex-none">
         <h2 className="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-4">사용 가이드</h2>
         <p className="text-slate-400 leading-relaxed text-sm">
           SonicFrame AI는 Gemini Vision의 시각 분석 능력과 ElevenLabs의 사운드 생성 기술을 결합하여, 
@@ -12,10 +12,10 @@ const GuideSection: React.FC = () => {
         </p>
       </div>
 
-      <div className="h-px bg-slate-800"></div>
+      <div className="h-px bg-slate-800 flex-none"></div>
 
       {/* Steps */}
-      <div className="space-y-6 lg:space-y-8">
+      <div className="space-y-6 lg:space-y-8 flex-grow">
         {/* Step 1 */}
         <div className="flex gap-4">
             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-900/50 text-brand-400 flex items-center justify-center font-bold border border-brand-500/30">1</div>
@@ -84,6 +84,22 @@ const GuideSection: React.FC = () => {
                 </p>
             </div>
         </div>
+      </div>
+
+      {/* Footer Link */}
+      <div className="mt-auto pt-8 border-t border-slate-800 pb-4 text-center lg:text-left">
+          <a 
+            href="https://xn--design-hl6wo12cquiba7767a.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-xs text-slate-500 hover:text-brand-400 transition-all duration-200 flex items-center justify-center lg:justify-start gap-1"
+          >
+            <span>© 2025 SonicFrame AI - </span>
+            <span className="font-medium underline underline-offset-4">떨림과울림Design.com</span>
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
       </div>
     </div>
   );
